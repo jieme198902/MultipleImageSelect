@@ -86,7 +86,7 @@ public class AlbumSelectActivity extends HelperActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ImageSelectActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ImageSelect2Activity.class);
                 intent.putExtra(Constants.INTENT_EXTRA_ALBUM, albums.get(position).name);
                 startActivityForResult(intent, Constants.REQUEST_CODE);
             }

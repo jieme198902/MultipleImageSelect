@@ -118,7 +118,7 @@ Add ```tools:replace="android:theme"``` to AlbumSelectActivity and ImageSelectAc
       <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
     </intent-filter>
     </activity>
-  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelectActivity"
+  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelect2Activity"
     tools:replace="android:theme"
     android:theme="@style/OverrideMultipleImageSelectTheme">
     <intent-filter>

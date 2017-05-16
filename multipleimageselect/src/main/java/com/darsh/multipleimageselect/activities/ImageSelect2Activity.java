@@ -1,5 +1,6 @@
 package com.darsh.multipleimageselect.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -37,7 +38,7 @@ import java.util.HashSet;
 /**
  * Created by Darshan on 4/18/2015.
  */
-public class ImageSelectActivity extends HelperActivity {
+public class ImageSelect2Activity extends HelperActivity {
     private ArrayList<Image> images;
     private String album;
 
@@ -56,8 +57,9 @@ public class ImageSelectActivity extends HelperActivity {
     private Handler handler;
     private Thread thread;
 
-    private final String[] projection = new String[]{ MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATA };
+    private final String[] projection = new String[]{MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATA};
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class ImageSelectActivity extends HelperActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (actionMode == null) {
-                    actionMode = ImageSelectActivity.this.startActionMode(callback);
+                    actionMode = ImageSelect2Activity.this.startActionMode(callback);
                 }
                 toggleSelection(position);
                 actionMode.setTitle(countSelected + " " + getString(R.string.selected));
@@ -108,6 +110,7 @@ public class ImageSelectActivity extends HelperActivity {
         super.onStart();
 
         handler = new Handler() {
+            @SuppressLint("WrongConstant")
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -210,7 +213,7 @@ public class ImageSelectActivity extends HelperActivity {
     }
 
     private void orientationBasedUI(int orientation) {
-        final WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        @SuppressLint("WrongConstant") final WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         final DisplayMetrics metrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
@@ -253,7 +256,8 @@ public class ImageSelectActivity extends HelperActivity {
         }
 
         @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {int i = item.getItemId();
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int i = item.getItemId();
             if (i == R.id.menu_item_add_image) {
                 sendIntent();
                 return true;
@@ -270,6 +274,7 @@ public class ImageSelectActivity extends HelperActivity {
         }
     };
 
+    @SuppressLint("WrongConstant")
     private void toggleSelection(int position) {
         if (!images.get(position).isSelected && countSelected >= Constants.limit) {
             Toast.makeText(
@@ -345,7 +350,7 @@ public class ImageSelectActivity extends HelperActivity {
             }
 
             Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
-                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " =?", new String[]{ album }, MediaStore.Images.Media.DATE_ADDED);
+                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " =?", new String[]{album}, MediaStore.Images.Media.DATE_ADDED);
             if (cursor == null) {
                 sendMessage(Constants.ERROR);
                 return;
@@ -431,6 +436,7 @@ public class ImageSelectActivity extends HelperActivity {
         sendMessage(Constants.PERMISSION_GRANTED);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void hideViews() {
         progressBar.setVisibility(View.INVISIBLE);
