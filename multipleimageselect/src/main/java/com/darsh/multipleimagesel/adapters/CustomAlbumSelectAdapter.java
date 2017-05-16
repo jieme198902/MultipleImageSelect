@@ -1,4 +1,4 @@
-package com.darsh.multipleimageselect.adapters;
+package com.darsh.multipleimagesel.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -7,17 +7,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.models.Album2;
+import com.darsh.multipleimagesel.R;
+import com.darsh.multipleimagesel.models.Album;
 
 import java.util.ArrayList;
 
 /**
  * Created by Darshan on 4/14/2015.
  */
-public class CustomAlbumSelect2Adapter extends CustomGeneric2Adapter<Album2> {
-    public CustomAlbumSelect2Adapter(Context context, ArrayList<Album2> album2s) {
-        super(context, album2s);
+public class CustomAlbumSelectAdapter extends CustomGenericAdapter<Album> {
+    public CustomAlbumSelectAdapter(Context context, ArrayList<Album> albums) {
+        super(context, albums);
     }
 
     @Override

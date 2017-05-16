@@ -1,4 +1,4 @@
-package com.darsh.multipleimageselect.adapters;
+package com.darsh.multipleimagesel.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 /**
  * Created by Darshan on 4/24/2015.
  */
-public abstract class CustomGeneric2Adapter<T> extends BaseAdapter {
+public abstract class CustomGenericAdapter<T> extends BaseAdapter {
     protected ArrayList<T> arrayList;
     protected Context context;
     protected LayoutInflater layoutInflater;
 
     protected int size;
 
-    public CustomGeneric2Adapter(Context context, ArrayList<T> arrayList) {
+    public CustomGenericAdapter(Context context, ArrayList<T> arrayList) {
         this.arrayList = arrayList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(this.context);

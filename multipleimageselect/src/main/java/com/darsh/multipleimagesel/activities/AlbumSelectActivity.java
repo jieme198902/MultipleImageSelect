@@ -1,4 +1,4 @@
-package com.darsh.multipleimageselect.activities;
+package com.darsh.multipleimagesel.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,10 +22,10 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.adapters.CustomAlbumSelect2Adapter;
-import com.darsh.multipleimageselect.helpers.Constants2;
-import com.darsh.multipleimageselect.models.Album2;
+import com.darsh.multipleimagesel.R;
+import com.darsh.multipleimagesel.adapters.CustomAlbumSelectAdapter;
+import com.darsh.multipleimagesel.helpers.Constants;
+import com.darsh.multipleimagesel.models.Album;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,14 +34,14 @@ import java.util.HashSet;
 /**
  * Created by Darshan on 4/14/2015.
  */
-public class AlbumSelect2Activity extends Helper2Activity {
-    private ArrayList<Album2> album2s;
+public class AlbumSelectActivity extends HelperActivity {
+    private ArrayList<Album> albums;
 
     private TextView errorDisplay;
 
     private ProgressBar progressBar;
     private GridView gridView;
-    private CustomAlbumSelect2Adapter adapter;
+    private CustomAlbumSelectAdapter adapter;
 
     private ActionBar actionBar;
 
@@ -76,7 +76,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
         if (intent == null) {
             finish();
         }
-        Constants2.limit = intent.getIntExtra(Constants2.INTENT_EXTRA_LIMIT, Constants2.DEFAULT_LIMIT);
+        Constants.limit = intent.getIntExtra(Constants.INTENT_EXTRA_LIMIT, Constants.DEFAULT_LIMIT);
 
         errorDisplay = (TextView) findViewById(R.id.text_view_error);
         errorDisplay.setVisibility(View.INVISIBLE);
@@ -86,9 +86,9 @@ public class AlbumSelect2Activity extends Helper2Activity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ImageSelect2Activity.class);
-                intent.putExtra(Constants2.INTENT_EXTRA_ALBUM, album2s.get(position).name);
-                startActivityForResult(intent, Constants2.REQUEST_CODE);
+                Intent intent = new Intent(getApplicationContext(), ImageSelectActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_ALBUM, albums.get(position).name);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
             }
         });
     }
@@ -101,20 +101,20 @@ public class AlbumSelect2Activity extends Helper2Activity {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case Constants2.PERMISSION_GRANTED: {
+                    case Constants.PERMISSION_GRANTED: {
                         loadAlbums();
                         break;
                     }
 
-                    case Constants2.FETCH_STARTED: {
+                    case Constants.FETCH_STARTED: {
                         progressBar.setVisibility(View.VISIBLE);
                         gridView.setVisibility(View.INVISIBLE);
                         break;
                     }
 
-                    case Constants2.FETCH_COMPLETED: {
+                    case Constants.FETCH_COMPLETED: {
                         if (adapter == null) {
-                            adapter = new CustomAlbumSelect2Adapter(getApplicationContext(), album2s);
+                            adapter = new CustomAlbumSelectAdapter(getApplicationContext(), albums);
                             gridView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);
@@ -127,7 +127,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
                         break;
                     }
 
-                    case Constants2.ERROR: {
+                    case Constants.ERROR: {
                         progressBar.setVisibility(View.INVISIBLE);
                         errorDisplay.setVisibility(View.VISIBLE);
                         break;
@@ -172,7 +172,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(null);
         }
-        album2s = null;
+        albums = null;
         if (adapter != null) {
             adapter.releaseResources();
         }
@@ -208,7 +208,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Constants2.REQUEST_CODE
+        if (requestCode == Constants.REQUEST_CODE
                 && resultCode == RESULT_OK
                 && data != null) {
             setResult(RESULT_OK, data);
@@ -240,18 +240,18 @@ public class AlbumSelect2Activity extends Helper2Activity {
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
             if (adapter == null) {
-                sendMessage(Constants2.FETCH_STARTED);
+                sendMessage(Constants.FETCH_STARTED);
             }
 
             Cursor cursor = getApplicationContext().getContentResolver()
                     .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
                             null, null, MediaStore.Images.Media.DATE_ADDED);
             if (cursor == null) {
-                sendMessage(Constants2.ERROR);
+                sendMessage(Constants.ERROR);
                 return;
             }
 
-            ArrayList<Album2> temp = new ArrayList<>(cursor.getCount());
+            ArrayList<Album> temp = new ArrayList<>(cursor.getCount());
             HashSet<Long> albumSet = new HashSet<>();
             File file;
             if (cursor.moveToLast()) {
@@ -273,7 +273,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
                          */
                         file = new File(image);
                         if (file.exists()) {
-                            temp.add(new Album2(album, image));
+                            temp.add(new Album(album, image));
                             albumSet.add(albumId);
                         }
                     }
@@ -282,13 +282,13 @@ public class AlbumSelect2Activity extends Helper2Activity {
             }
             cursor.close();
 
-            if (album2s == null) {
-                album2s = new ArrayList<>();
+            if (albums == null) {
+                albums = new ArrayList<>();
             }
-            album2s.clear();
-            album2s.addAll(temp);
+            albums.clear();
+            albums.addAll(temp);
 
-            sendMessage(Constants2.FETCH_COMPLETED);
+            sendMessage(Constants.FETCH_COMPLETED);
         }
     }
 
@@ -324,7 +324,7 @@ public class AlbumSelect2Activity extends Helper2Activity {
     @Override
     protected void permissionGranted() {
         Message message = handler.obtainMessage();
-        message.what = Constants2.PERMISSION_GRANTED;
+        message.what = Constants.PERMISSION_GRANTED;
         message.sendToTarget();
     }
 

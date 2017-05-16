@@ -2,8 +2,8 @@
 
 ![Alt text](/screenshots/mis.gif)
 
-An android library that allows selection of multiple image2s from gallery. It shows an initial
-album (buckets) chooser and then image2s in selected album. Can limit the number of image2s that
+An android library that allows selection of multiple images from gallery. It shows an initial
+album (buckets) chooser and then images in selected album. Can limit the number of images that
 can be selected. Can be used in apps with APK 11 onwards.
 
 Sample app can be found [here](https://github.com/darsh2/MultipleImageSelect/tree/master/sample) 
@@ -39,17 +39,17 @@ dependencies {
 In project's AndroidManifest.xml, add the following under application node:
 ```xml
 <activity
-  android:name="com.darsh.multipleimageselect.activities.AlbumSelect2Activity"
+  android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
   android:theme="@style/MultipleImageSelectTheme">
   <intent-filter>
     <category android:name="android.intent.category.DEFAULT" />
   </intent-filter>
 </activity>
 ```
-   In the activity from where you want to call image2 selector, create Intent as follows:
+   In the activity from where you want to call image selector, create Intent as follows:
 ```java
 Intent intent = new Intent(this, AlbumSelectActivity.class);
-//set limit on number of image2s that can be selected, default is 10
+//set limit on number of images that can be selected, default is 10
 intent.putExtra(Constants.INTENT_EXTRA_LIMIT, numberOfImagesToSelect);
 startActivityForResult(intent, Constants.REQUEST_CODE);
 ```
@@ -58,8 +58,8 @@ startActivityForResult(intent, Constants.REQUEST_CODE);
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
   if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-    //The array list has the image2 paths of the selected image2s
-    ArrayList<Image> image2s = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+    //The array list has the image paths of the selected images
+    ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
     ...  
 }
 ```
@@ -111,14 +111,14 @@ Add ```tools:replace="android:theme"``` to AlbumSelectActivity and ImageSelectAc
   xmlns:tools="http://schemas.android.com/tools"
   ...>
   
-  <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelect2Activity"
+  <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
 		tools:replace="android:theme"
     android:theme="@style/OverrideMultipleImageSelectTheme">
     <intent-filter>
       <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
     </intent-filter>
     </activity>
-  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelect2Activity"
+  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelectActivity"
     tools:replace="android:theme"
     android:theme="@style/OverrideMultipleImageSelectTheme">
     <intent-filter>

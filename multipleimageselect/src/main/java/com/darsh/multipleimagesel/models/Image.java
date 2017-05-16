@@ -1,4 +1,4 @@
-package com.darsh.multipleimageselect.models;
+package com.darsh.multipleimagesel.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,13 +6,13 @@ import android.os.Parcelable;
 /**
  * Created by Darshan on 4/18/2015.
  */
-public class Image2 implements Parcelable {
+public class Image implements Parcelable {
     public long id;
     public String name;
     public String path;
     public boolean isSelected;
 
-    public Image2(long id, String name, String path, boolean isSelected) {
+    public Image(long id, String name, String path, boolean isSelected) {
         this.id = id;
         this.name = name;
         this.path = path;
@@ -31,19 +31,19 @@ public class Image2 implements Parcelable {
         dest.writeString(path);
     }
 
-    public static final Parcelable.Creator<Image2> CREATOR = new Parcelable.Creator<Image2>() {
+    public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
         @Override
-        public Image2 createFromParcel(Parcel source) {
-            return new Image2(source);
+        public Image createFromParcel(Parcel source) {
+            return new Image(source);
         }
 
         @Override
-        public Image2[] newArray(int size) {
-            return new Image2[size];
+        public Image[] newArray(int size) {
+            return new Image[size];
         }
     };
 
-    private Image2(Parcel in) {
+    private Image(Parcel in) {
         id = in.readLong();
         name = in.readString();
         path = in.readString();

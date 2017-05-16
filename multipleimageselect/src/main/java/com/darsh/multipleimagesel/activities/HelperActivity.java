@@ -1,4 +1,4 @@
-package com.darsh.multipleimageselect.activities;
+package com.darsh.multipleimagesel.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,13 +12,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.helpers.Constants2;
+import com.darsh.multipleimagesel.R;
+import com.darsh.multipleimagesel.helpers.Constants;
 
 /**
  * Created by darshan on 26/9/16.
  */
-public class Helper2Activity extends AppCompatActivity {
+public class HelperActivity extends AppCompatActivity {
     protected View view;
 
     private final int maxLines = 4;
@@ -30,7 +30,7 @@ public class Helper2Activity extends AppCompatActivity {
             permissionGranted();
 
         } else {
-            ActivityCompat.requestPermissions(this, permissions, Constants2.PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permissions, Constants.PERMISSION_REQUEST_CODE);
         }
     }
 
@@ -52,9 +52,9 @@ public class Helper2Activity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         ActivityCompat.requestPermissions(
-                                Helper2Activity.this,
+                                HelperActivity.this,
                                 permissions,
-                                Constants2.PERMISSION_REQUEST_CODE);
+                                Constants.PERMISSION_REQUEST_CODE);
                     }
                 });
 
@@ -73,14 +73,14 @@ public class Helper2Activity extends AppCompatActivity {
                     public void onClick(View v) {
                         Uri uri = Uri.fromParts(
                                 getString(R.string.permission_package),
-                                Helper2Activity.this.getPackageName(),
+                                HelperActivity.this.getPackageName(),
                                 null);
 
                         Intent intent = new Intent();
                         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         intent.setData(uri);
-                        startActivityForResult(intent, Constants2.PERMISSION_REQUEST_CODE);
+                        startActivityForResult(intent, Constants.PERMISSION_REQUEST_CODE);
                     }
                 });
 
@@ -92,7 +92,7 @@ public class Helper2Activity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode != Constants2.PERMISSION_REQUEST_CODE
+        if (requestCode != Constants.PERMISSION_REQUEST_CODE
                 || grantResults.length == 0
                 || grantResults[0] == PackageManager.PERMISSION_DENIED) {
             permissionDenied();
