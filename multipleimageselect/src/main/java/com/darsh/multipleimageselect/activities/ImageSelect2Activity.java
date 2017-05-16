@@ -38,7 +38,7 @@ import java.util.HashSet;
 /**
  * Created by Darshan on 4/18/2015.
  */
-public class ImageSelect22Activity extends Helper2Activity {
+public class ImageSelect2Activity extends Helper2Activity {
     private ArrayList<Image> images;
     private String album;
 
@@ -93,7 +93,7 @@ public class ImageSelect22Activity extends Helper2Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (actionMode == null) {
-                    actionMode = ImageSelect22Activity.this.startActionMode(callback);
+                    actionMode = ImageSelect2Activity.this.startActionMode(callback);
                 }
                 toggleSelection(position);
                 actionMode.setTitle(countSelected + " " + getString(R.string.selected));

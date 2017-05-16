@@ -15,8 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by Darshan on 4/14/2015.
  */
-public class CustomAlbumSelect22Adapter extends CustomGeneric2Adapter<Album> {
-    public CustomAlbumSelect22Adapter(Context context, ArrayList<Album> albums) {
+public class CustomAlbumSelect2Adapter extends CustomGeneric2Adapter<Album> {
+    public CustomAlbumSelect2Adapter(Context context, ArrayList<Album> albums) {
         super(context, albums);
     }
 

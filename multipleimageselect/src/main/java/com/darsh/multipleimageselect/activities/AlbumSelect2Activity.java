@@ -23,7 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.adapters.CustomAlbumSelect22Adapter;
+import com.darsh.multipleimageselect.adapters.CustomAlbumSelect2Adapter;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Album;
 
@@ -34,14 +34,14 @@ import java.util.HashSet;
 /**
  * Created by Darshan on 4/14/2015.
  */
-public class AlbumSelect22Activity extends Helper2Activity {
+public class AlbumSelect2Activity extends Helper2Activity {
     private ArrayList<Album> albums;
 
     private TextView errorDisplay;
 
     private ProgressBar progressBar;
     private GridView gridView;
-    private CustomAlbumSelect22Adapter adapter;
+    private CustomAlbumSelect2Adapter adapter;
 
     private ActionBar actionBar;
 
@@ -86,7 +86,7 @@ public class AlbumSelect22Activity extends Helper2Activity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ImageSelect22Activity.class);
+                Intent intent = new Intent(getApplicationContext(), ImageSelect2Activity.class);
                 intent.putExtra(Constants.INTENT_EXTRA_ALBUM, albums.get(position).name);
                 startActivityForResult(intent, Constants.REQUEST_CODE);
             }
@@ -114,7 +114,7 @@ public class AlbumSelect22Activity extends Helper2Activity {
 
                     case Constants.FETCH_COMPLETED: {
                         if (adapter == null) {
-                            adapter = new CustomAlbumSelect22Adapter(getApplicationContext(), albums);
+                            adapter = new CustomAlbumSelect2Adapter(getApplicationContext(), albums);
                             gridView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);

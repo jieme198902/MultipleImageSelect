@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.darsh.multipleimageselect.activities.AlbumSelect22Activity;
+import com.darsh.multipleimageselect.activities.AlbumSelect2Activity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.text_view);
 
-        Intent intent = new Intent(MainActivity.this, AlbumSelect22Activity.class);
+        Intent intent = new Intent(MainActivity.this, AlbumSelect2Activity.class);
         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 3);
         startActivityForResult(intent, Constants.REQUEST_CODE);
     }
