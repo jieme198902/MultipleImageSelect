@@ -28,8 +28,8 @@ import android.widget.Toast;
 
 import com.darsh.multipleimageselect.R;
 import com.darsh.multipleimageselect.adapters.CustomImageSelect2Adapter;
-import com.darsh.multipleimageselect.helpers.Constants;
-import com.darsh.multipleimageselect.models.Image;
+import com.darsh.multipleimageselect.helpers.Constants2;
+import com.darsh.multipleimageselect.models.Image2;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import java.util.HashSet;
  * Created by Darshan on 4/18/2015.
  */
 public class ImageSelect2Activity extends Helper2Activity {
-    private ArrayList<Image> images;
+    private ArrayList<Image2> image2s;
     private String album;
 
     private TextView errorDisplay;
@@ -82,7 +82,7 @@ public class ImageSelect2Activity extends Helper2Activity {
         if (intent == null) {
             finish();
         }
-        album = intent.getStringExtra(Constants.INTENT_EXTRA_ALBUM);
+        album = intent.getStringExtra(Constants2.INTENT_EXTRA_ALBUM);
 
         errorDisplay = (TextView) findViewById(R.id.text_view_error);
         errorDisplay.setVisibility(View.INVISIBLE);
@@ -114,26 +114,26 @@ public class ImageSelect2Activity extends Helper2Activity {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case Constants.PERMISSION_GRANTED: {
+                    case Constants2.PERMISSION_GRANTED: {
                         loadImages();
                         break;
                     }
 
-                    case Constants.FETCH_STARTED: {
+                    case Constants2.FETCH_STARTED: {
                         progressBar.setVisibility(View.VISIBLE);
                         gridView.setVisibility(View.INVISIBLE);
                         break;
                     }
 
-                    case Constants.FETCH_COMPLETED: {
+                    case Constants2.FETCH_COMPLETED: {
                         /*
-                        If adapter is null, this implies that the loaded images will be shown
+                        If adapter is null, this implies that the loaded image2s will be shown
                         for the first time, hence send FETCH_COMPLETED message.
                         However, if adapter has been initialised, this thread was run either
                         due to the activity being restarted or content being changed.
                          */
                         if (adapter == null) {
-                            adapter = new CustomImageSelect2Adapter(getApplicationContext(), images);
+                            adapter = new CustomImageSelect2Adapter(getApplicationContext(), image2s);
                             gridView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);
@@ -143,7 +143,7 @@ public class ImageSelect2Activity extends Helper2Activity {
                         } else {
                             adapter.notifyDataSetChanged();
                             /*
-                            Some selected images may have been deleted
+                            Some selected image2s may have been deleted
                             hence update action mode title
                              */
                             if (actionMode != null) {
@@ -154,7 +154,7 @@ public class ImageSelect2Activity extends Helper2Activity {
                         break;
                     }
 
-                    case Constants.ERROR: {
+                    case Constants2.ERROR: {
                         progressBar.setVisibility(View.INVISIBLE);
                         errorDisplay.setVisibility(View.VISIBLE);
                         break;
@@ -199,7 +199,7 @@ public class ImageSelect2Activity extends Helper2Activity {
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(null);
         }
-        images = null;
+        image2s = null;
         if (adapter != null) {
             adapter.releaseResources();
         }
@@ -276,17 +276,17 @@ public class ImageSelect2Activity extends Helper2Activity {
 
     @SuppressLint("WrongConstant")
     private void toggleSelection(int position) {
-        if (!images.get(position).isSelected && countSelected >= Constants.limit) {
+        if (!image2s.get(position).isSelected && countSelected >= Constants2.limit) {
             Toast.makeText(
                     getApplicationContext(),
-                    String.format(getString(R.string.limit_exceeded), Constants.limit),
+                    String.format(getString(R.string.limit_exceeded), Constants2.limit),
                     Toast.LENGTH_SHORT)
                     .show();
             return;
         }
 
-        images.get(position).isSelected = !images.get(position).isSelected;
-        if (images.get(position).isSelected) {
+        image2s.get(position).isSelected = !image2s.get(position).isSelected;
+        if (image2s.get(position).isSelected) {
             countSelected++;
         } else {
             countSelected--;
@@ -295,26 +295,26 @@ public class ImageSelect2Activity extends Helper2Activity {
     }
 
     private void deselectAll() {
-        for (int i = 0, l = images.size(); i < l; i++) {
-            images.get(i).isSelected = false;
+        for (int i = 0, l = image2s.size(); i < l; i++) {
+            image2s.get(i).isSelected = false;
         }
         countSelected = 0;
         adapter.notifyDataSetChanged();
     }
 
-    private ArrayList<Image> getSelected() {
-        ArrayList<Image> selectedImages = new ArrayList<>();
-        for (int i = 0, l = images.size(); i < l; i++) {
-            if (images.get(i).isSelected) {
-                selectedImages.add(images.get(i));
+    private ArrayList<Image2> getSelected() {
+        ArrayList<Image2> selectedImage2s = new ArrayList<>();
+        for (int i = 0, l = image2s.size(); i < l; i++) {
+            if (image2s.get(i).isSelected) {
+                selectedImage2s.add(image2s.get(i));
             }
         }
-        return selectedImages;
+        return selectedImage2s;
     }
 
     private void sendIntent() {
         Intent intent = new Intent();
-        intent.putParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES, getSelected());
+        intent.putParcelableArrayListExtra(Constants2.INTENT_EXTRA_IMAGES, getSelected());
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -330,21 +330,21 @@ public class ImageSelect2Activity extends Helper2Activity {
             /*
             If the adapter is null, this is first time this activity's view is
             being shown, hence send FETCH_STARTED message to show progress bar
-            while images are loaded from phone
+            while image2s are loaded from phone
              */
             if (adapter == null) {
-                sendMessage(Constants.FETCH_STARTED);
+                sendMessage(Constants2.FETCH_STARTED);
             }
 
             File file;
             HashSet<Long> selectedImages = new HashSet<>();
-            if (images != null) {
-                Image image;
-                for (int i = 0, l = images.size(); i < l; i++) {
-                    image = images.get(i);
-                    file = new File(image.path);
-                    if (file.exists() && image.isSelected) {
-                        selectedImages.add(image.id);
+            if (image2s != null) {
+                Image2 image2;
+                for (int i = 0, l = image2s.size(); i < l; i++) {
+                    image2 = image2s.get(i);
+                    file = new File(image2.path);
+                    if (file.exists() && image2.isSelected) {
+                        selectedImages.add(image2.id);
                     }
                 }
             }
@@ -352,18 +352,18 @@ public class ImageSelect2Activity extends Helper2Activity {
             Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
                     MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " =?", new String[]{album}, MediaStore.Images.Media.DATE_ADDED);
             if (cursor == null) {
-                sendMessage(Constants.ERROR);
+                sendMessage(Constants2.ERROR);
                 return;
             }
 
             /*
             In case this runnable is executed to onChange calling loadImages,
             using countSelected variable can result in a race condition. To avoid that,
-            tempCountSelected keeps track of number of selected images. On handling
+            tempCountSelected keeps track of number of selected image2s. On handling
             FETCH_COMPLETED message, countSelected is assigned value of tempCountSelected.
              */
             int tempCountSelected = 0;
-            ArrayList<Image> temp = new ArrayList<>(cursor.getCount());
+            ArrayList<Image2> temp = new ArrayList<>(cursor.getCount());
             if (cursor.moveToLast()) {
                 do {
                     if (Thread.interrupted()) {
@@ -380,20 +380,20 @@ public class ImageSelect2Activity extends Helper2Activity {
 
                     file = new File(path);
                     if (file.exists()) {
-                        temp.add(new Image(id, name, path, isSelected));
+                        temp.add(new Image2(id, name, path, isSelected));
                     }
 
                 } while (cursor.moveToPrevious());
             }
             cursor.close();
 
-            if (images == null) {
-                images = new ArrayList<>();
+            if (image2s == null) {
+                image2s = new ArrayList<>();
             }
-            images.clear();
-            images.addAll(temp);
+            image2s.clear();
+            image2s.addAll(temp);
 
-            sendMessage(Constants.FETCH_COMPLETED, tempCountSelected);
+            sendMessage(Constants2.FETCH_COMPLETED, tempCountSelected);
         }
     }
 
@@ -433,7 +433,7 @@ public class ImageSelect2Activity extends Helper2Activity {
 
     @Override
     protected void permissionGranted() {
-        sendMessage(Constants.PERMISSION_GRANTED);
+        sendMessage(Constants2.PERMISSION_GRANTED);
     }
 
     @SuppressLint("WrongConstant")

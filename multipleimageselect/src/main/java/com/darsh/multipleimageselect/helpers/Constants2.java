@@ -3,7 +3,7 @@ package com.darsh.multipleimageselect.helpers;
 /**
  * Created by Darshan on 5/26/2015.
  */
-public class Constants {
+public class Constants2 {
     public static final int PERMISSION_REQUEST_CODE = 1000;
     public static final int PERMISSION_GRANTED = 1001;
     public static final int PERMISSION_DENIED = 1002;

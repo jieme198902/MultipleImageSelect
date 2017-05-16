@@ -8,16 +8,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.models.Album;
+import com.darsh.multipleimageselect.models.Album2;
 
 import java.util.ArrayList;
 
 /**
  * Created by Darshan on 4/14/2015.
  */
-public class CustomAlbumSelect2Adapter extends CustomGeneric2Adapter<Album> {
-    public CustomAlbumSelect2Adapter(Context context, ArrayList<Album> albums) {
-        super(context, albums);
+public class CustomAlbumSelect2Adapter extends CustomGeneric2Adapter<Album2> {
+    public CustomAlbumSelect2Adapter(Context context, ArrayList<Album2> album2s) {
+        super(context, album2s);
     }
 
     @Override
