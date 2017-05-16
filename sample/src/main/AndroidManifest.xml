@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity">
+        <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelect22Activity">
             <intent-filter>
                 <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT"/>
             </intent-filter>

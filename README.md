@@ -39,7 +39,7 @@ dependencies {
 In project's AndroidManifest.xml, add the following under application node:
 ```xml
 <activity
-  android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
+  android:name="com.darsh.multipleimageselect.activities.AlbumSelect22Activity"
   android:theme="@style/MultipleImageSelectTheme">
   <intent-filter>
     <category android:name="android.intent.category.DEFAULT" />
@@ -111,14 +111,14 @@ Add ```tools:replace="android:theme"``` to AlbumSelectActivity and ImageSelectAc
   xmlns:tools="http://schemas.android.com/tools"
   ...>
   
-  <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
+  <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelect22Activity"
 		tools:replace="android:theme"
     android:theme="@style/OverrideMultipleImageSelectTheme">
     <intent-filter>
       <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
     </intent-filter>
     </activity>
-  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelect2Activity"
+  <activity android:name="com.darsh.multipleimageselect.activities.ImageSelect22Activity"
     tools:replace="android:theme"
     android:theme="@style/OverrideMultipleImageSelectTheme">
     <intent-filter>

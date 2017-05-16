@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.darsh.multipleimageselect.R;
-import com.darsh.multipleimageselect.adapters.CustomImageSelectAdapter;
+import com.darsh.multipleimageselect.adapters.CustomImageSelect2Adapter;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
@@ -38,7 +38,7 @@ import java.util.HashSet;
 /**
  * Created by Darshan on 4/18/2015.
  */
-public class ImageSelect2Activity extends HelperActivity {
+public class ImageSelect22Activity extends Helper2Activity {
     private ArrayList<Image> images;
     private String album;
 
@@ -46,7 +46,7 @@ public class ImageSelect2Activity extends HelperActivity {
 
     private ProgressBar progressBar;
     private GridView gridView;
-    private CustomImageSelectAdapter adapter;
+    private CustomImageSelect2Adapter adapter;
 
     private ActionBar actionBar;
 
@@ -93,7 +93,7 @@ public class ImageSelect2Activity extends HelperActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (actionMode == null) {
-                    actionMode = ImageSelect2Activity.this.startActionMode(callback);
+                    actionMode = ImageSelect22Activity.this.startActionMode(callback);
                 }
                 toggleSelection(position);
                 actionMode.setTitle(countSelected + " " + getString(R.string.selected));
@@ -133,7 +133,7 @@ public class ImageSelect2Activity extends HelperActivity {
                         due to the activity being restarted or content being changed.
                          */
                         if (adapter == null) {
-                            adapter = new CustomImageSelectAdapter(getApplicationContext(), images);
+                            adapter = new CustomImageSelect2Adapter(getApplicationContext(), images);
                             gridView.setAdapter(adapter);
 
                             progressBar.setVisibility(View.INVISIBLE);

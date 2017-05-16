@@ -15,8 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by Darshan on 4/18/2015.
  */
-public class CustomImageSelectAdapter extends CustomGenericAdapter<Image> {
-    public CustomImageSelectAdapter(Context context, ArrayList<Image> images) {
+public class CustomImageSelect2Adapter extends CustomGeneric2Adapter<Image> {
+    public CustomImageSelect2Adapter(Context context, ArrayList<Image> images) {
         super(context, images);
     }
 

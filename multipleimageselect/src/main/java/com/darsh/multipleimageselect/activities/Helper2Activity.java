@@ -18,7 +18,7 @@ import com.darsh.multipleimageselect.helpers.Constants;
 /**
  * Created by darshan on 26/9/16.
  */
-public class HelperActivity extends AppCompatActivity {
+public class Helper2Activity extends AppCompatActivity {
     protected View view;
 
     private final int maxLines = 4;
@@ -52,7 +52,7 @@ public class HelperActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         ActivityCompat.requestPermissions(
-                                HelperActivity.this,
+                                Helper2Activity.this,
                                 permissions,
                                 Constants.PERMISSION_REQUEST_CODE);
                     }
@@ -73,7 +73,7 @@ public class HelperActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Uri uri = Uri.fromParts(
                                 getString(R.string.permission_package),
-                                HelperActivity.this.getPackageName(),
+                                Helper2Activity.this.getPackageName(),
                                 null);
 
                         Intent intent = new Intent();
