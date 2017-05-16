@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == Constants.REQUEST_CODE && resultCode == 1110 && data != null) {
             ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
             StringBuffer stringBuffer = new StringBuffer();
             for (int i = 0, l = images.size(); i < l; i++) {

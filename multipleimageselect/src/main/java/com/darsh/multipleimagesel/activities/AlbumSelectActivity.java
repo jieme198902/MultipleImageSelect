@@ -1,5 +1,6 @@
 package com.darsh.multipleimagesel.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -54,6 +55,7 @@ public class AlbumSelectActivity extends HelperActivity {
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
             MediaStore.Images.Media.DATA };
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +100,7 @@ public class AlbumSelectActivity extends HelperActivity {
         super.onStart();
 
         handler = new Handler() {
+            @SuppressLint("WrongConstant")
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -186,7 +189,7 @@ public class AlbumSelectActivity extends HelperActivity {
     }
 
     private void orientationBasedUI(int orientation) {
-        final WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        @SuppressLint("WrongConstant") final WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         final DisplayMetrics metrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
@@ -211,7 +214,7 @@ public class AlbumSelectActivity extends HelperActivity {
         if (requestCode == Constants.REQUEST_CODE
                 && resultCode == RESULT_OK
                 && data != null) {
-            setResult(RESULT_OK, data);
+            setResult(1110, data);
             finish();
         }
     }
@@ -328,6 +331,7 @@ public class AlbumSelectActivity extends HelperActivity {
         message.sendToTarget();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void hideViews() {
         progressBar.setVisibility(View.INVISIBLE);
